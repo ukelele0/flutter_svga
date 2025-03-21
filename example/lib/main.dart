@@ -4,7 +4,7 @@ import 'package:flutter_svga/flutter_svga.dart';
 import 'dart:math' as math;
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -18,7 +18,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
+      home: const HomeScreen(),
       theme: ThemeData(useMaterial3: false),
     );
   }
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
     "kingset.svga": (entity) => entity.dynamicItem
       ..setText(
           TextPainter(
-              text: TextSpan(
+              text: const TextSpan(
                   text: "Hello, World!",
                   style: TextStyle(
                     fontSize: 28,
@@ -121,19 +121,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     fontWeight: FontWeight.bold,
                   ))),
           "banner")
-      ..setImageWithUrl(
-          "https://github.com/PonyCui/resources/blob/master/svga_replace_avatar.png?raw=true",
-          "99")
+      ..setImageWithUrl("https://github.com/PonyCui/resources/blob/master/svga_replace_avatar.png?raw=true", "99")
       ..setDynamicDrawer((canvas, frameIndex) {
-        canvas.drawRect(Rect.fromLTWH(0, 0, 88, 88),
-            Paint()..color = Colors.red); // draw by yourself.
+        canvas.drawRect(const Rect.fromLTWH(0, 0, 88, 88), Paint()..color = Colors.red); // draw by yourself.
       }, "banner"),
   };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('SVGA Flutter Samples')),
+      appBar: AppBar(title: const Text('SVGA Flutter Samples')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -147,9 +144,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
-                prefixIcon: Icon(Icons.link),
+                prefixIcon: const Icon(Icons.link),
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.play_arrow, color: Colors.blue),
+                  icon: const Icon(Icons.play_arrow, color: Colors.blue),
                   onPressed: _loadSvgaFromTextField,
                 ),
               ),
@@ -157,11 +154,11 @@ class _HomeScreenState extends State<HomeScreen> {
               textInputAction: TextInputAction.done,
               onSubmitted: (_) => _loadSvgaFromTextField(),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Expanded(
               child: ListView.separated(
                 itemCount: samples.length,
-                separatorBuilder: (_, __) => Divider(
+                separatorBuilder: (_, __) => const Divider(
                   color: Colors.grey,
                   thickness: 1,
                   indent: 16,
@@ -169,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 itemBuilder: (context, index) {
                   return ListTile(
-                    leading: CircleAvatar(
+                    leading: const CircleAvatar(
                       backgroundColor: Colors.blueAccent,
                       child: Icon(
                         Icons.animation,
@@ -178,7 +175,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     title: Text(
                       samples[index].first,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
@@ -190,11 +187,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 14,
                       ),
                     ),
-                    trailing: Icon(
+                    trailing: const Icon(
                       Icons.play_circle_fill_outlined,
                       color: Colors.blue,
                     ),
-                    contentPadding: EdgeInsets.symmetric(
+                    contentPadding: const EdgeInsets.symmetric(
                       horizontal: 16,
                       vertical: 8,
                     ),
@@ -230,8 +227,7 @@ class SVGASampleScreen extends StatefulWidget {
   State<SVGASampleScreen> createState() => _SVGASampleScreenState();
 }
 
-class _SVGASampleScreenState extends State<SVGASampleScreen>
-    with SingleTickerProviderStateMixin {
+class _SVGASampleScreenState extends State<SVGASampleScreen> with SingleTickerProviderStateMixin {
   SVGAAnimationController? animationController;
   bool isLoading = true;
   Color backgroundColor = Colors.transparent;
@@ -297,7 +293,7 @@ class _SVGASampleScreenState extends State<SVGASampleScreen>
               style: Theme.of(context).textTheme.headlineSmall,
             ),
           ),
-          if (isLoading) LinearProgressIndicator(),
+          if (isLoading) const LinearProgressIndicator(),
           Center(
             child: ColoredBox(
               color: backgroundColor,
@@ -318,9 +314,7 @@ class _SVGASampleScreenState extends State<SVGASampleScreen>
           ? null
           : FloatingActionButton.extended(
               label: Text(animationController!.isAnimating ? "Pause" : "Play"),
-              icon: Icon(animationController!.isAnimating
-                  ? Icons.pause
-                  : Icons.play_arrow),
+              icon: Icon(animationController!.isAnimating ? Icons.pause : Icons.play_arrow),
               onPressed: () {
                 if (animationController?.isAnimating == true) {
                   animationController?.stop();
@@ -355,14 +349,14 @@ class _SVGASampleScreenState extends State<SVGASampleScreen>
   /// Returns a [Widget] that displays the options panel.
   Widget _buildOptions(BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       width: 240,
-      margin: EdgeInsets.all(12),
-      padding: EdgeInsets.all(5),
+      margin: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(5),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.6),
+        color: Colors.white.withOpacity(0.6),
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black26,
             blurRadius: 10,
@@ -381,7 +375,7 @@ class _SVGASampleScreenState extends State<SVGASampleScreen>
             ),
             title: Text(
               hideOptions ? "Show Options" : "Hide Options",
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             onTap: () {
               setState(() {
@@ -391,17 +385,17 @@ class _SVGASampleScreenState extends State<SVGASampleScreen>
           ),
 
           if (!hideOptions) ...[
-            Divider(),
+            const Divider(),
 
             // Current Frame Indicator
             AnimatedBuilder(
               animation: animationController!,
               builder: (context, child) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     'Current Frame: ${animationController!.currentFrame + 1}/${animationController!.frames}',
-                    style: TextStyle(fontWeight: FontWeight.w600),
+                    style: const TextStyle(fontWeight: FontWeight.w600),
                   ),
                 );
               },
@@ -426,15 +420,14 @@ class _SVGASampleScreenState extends State<SVGASampleScreen>
                       if (animationController?.isAnimating == true) {
                         animationController?.stop();
                       }
-                      animationController?.value =
-                          v / animationController!.frames;
+                      animationController?.value = v / animationController!.frames;
                     },
                   ),
                 );
               },
             ),
 
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
 
             // Image Filter Quality
             _buildDropdown(
@@ -455,7 +448,7 @@ class _SVGASampleScreenState extends State<SVGASampleScreen>
               });
             }),
 
-            Divider(),
+            const Divider(),
 
             // Width & Height Sliders
             _buildSlider(
@@ -495,7 +488,7 @@ class _SVGASampleScreenState extends State<SVGASampleScreen>
               },
             ),
 
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
 
             // Background Color Picker
             _buildColorPicker(),
@@ -525,7 +518,7 @@ class _SVGASampleScreenState extends State<SVGASampleScreen>
     required ValueChanged<T?> onChanged,
   }) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -554,7 +547,7 @@ class _SVGASampleScreenState extends State<SVGASampleScreen>
   /// [onChanged] is the callback to call when the user toggles the switch.
   Widget _buildSwitch(String label, bool value, ValueChanged<bool> onChanged) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -620,12 +613,12 @@ class _SVGASampleScreenState extends State<SVGASampleScreen>
     ];
 
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Background Color"),
-          SizedBox(height: 8),
+          const Text("Background Color"),
+          const SizedBox(height: 8),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: colors
@@ -637,16 +630,14 @@ class _SVGASampleScreenState extends State<SVGASampleScreen>
                       });
                     },
                     child: AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
+                      duration: const Duration(milliseconds: 200),
                       width: 28,
                       height: 28,
                       decoration: BoxDecoration(
                         color: color,
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: backgroundColor == color
-                              ? Colors.white
-                              : Colors.grey,
+                          color: backgroundColor == color ? Colors.white : Colors.grey,
                           width: 3,
                         ),
                       ),
