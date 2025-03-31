@@ -11,11 +11,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  archive: ^4.0.2
+  archive: ^3.4.10
   http: ^1.2.2
   path_drawing: ^1.0.1
-  protobuf: ^3.1.0
-  path_provider: ^2.1.4
+  protobuf: ^2.0.0
+  path_provider: ^2.1.2
   audioplayers: ^6.4.0
 
 dev_dependencies:
